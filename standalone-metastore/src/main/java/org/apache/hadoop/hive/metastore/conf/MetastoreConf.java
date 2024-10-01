@@ -36,6 +36,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.System;
 import java.net.URI;
 import java.net.URL;
 import java.util.Arrays;
@@ -313,12 +314,13 @@ public class MetastoreConf {
     CAPABILITY_CHECK("metastore.client.capability.check",
         "hive.metastore.client.capability.check", true,
         "Whether to check client capabilities for potentially breaking API usage."),
-    CATALOG_DEFAULT("metastore.catalog.default", "metastore.catalog.default", "hive",
-        "The default catalog to use when a catalog is not specified.  Default is 'hive' (the " +
-            "default catalog)."),
+    CATALOG_DEFAULT("metastore.catalog.default", "metastore.catalog.default",
+        System.getenv("METASTORE_CATALOG_NAME") != null ? System.getenv("METASTORE_CATALOG_NAME") : "hive",
+        "The default catalog to use when a catalog is not specified. Default is getting " +
+        "from METASTORE_CATALOG_NAME environment variable. If not set, the default is 'hive'."),
     CATALOGS_TO_CACHE("metastore.cached.rawstore.catalogs", "metastore.cached.rawstore.catalogs",
-        "hive", "Comma separated list of catalogs to cache in the CachedStore. Default is 'hive' " +
-        "(the default catalog).  Empty string means all catalogs will be cached."),
+        "", "Comma separated list of catalogs to cache in the CachedStore. Default is '' " +
+        "(all catalog).  Empty string means all catalogs will be cached."),
     CLIENT_CONNECT_RETRY_DELAY("metastore.client.connect.retry.delay",
         "hive.metastore.client.connect.retry.delay", 1, TimeUnit.SECONDS,
         "Number of seconds for the client to wait between consecutive connection attempts"),
