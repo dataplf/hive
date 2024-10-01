@@ -20,6 +20,7 @@ package org.apache.hadoop.hive.metastore;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.lang.System;
 import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -59,7 +60,7 @@ import org.apache.hadoop.util.ReflectionUtils;
  * This class represents a warehouse where data of Hive tables is stored
  */
 public class Warehouse {
-  public static final String DEFAULT_CATALOG_NAME = "hive";
+  public static final String DEFAULT_CATALOG_NAME = System.getenv("METASTORE_CATALOG_NAME") != null ? System.getenv("METASTORE_CATALOG_NAME") : "hive";
   public static final String DEFAULT_CATALOG_COMMENT = "Default catalog, for Hive";
   public static final String DEFAULT_DATABASE_NAME = "default";
   public static final String DEFAULT_DATABASE_COMMENT = "Default Hive database";
