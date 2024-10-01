@@ -145,6 +145,7 @@ public class HiveMetaStoreClient implements IMetaStoreClient, AutoCloseable {
     throws MetaException {
 
     this.hookLoader = hookLoader;
+    LOG.debug("Init HiveMetaStoreClient with conf: {}", conf);
     if (conf == null) {
       conf = MetastoreConf.newMetastoreConf();
       this.conf = conf;
